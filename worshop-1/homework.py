@@ -1,5 +1,33 @@
 import dlt 
 
+# Question 1
+'''
+def square_root_generator(limit):
+    n = 1
+    while n <= limit:
+        yield n ** 0.5
+        n += 1
+
+# Example usage:
+limit = 5
+generator = square_root_generator(limit)
+sum = 0
+
+for sqrt_value in generator:
+    sum += sqrt_value
+
+print('the sum is ', sum)
+'''
+
+
+# Question 2 
+'''
+generator = square_root_generator(13)
+
+for index, value in enumerate(range(0, 13)):
+    print(index, next(generator))
+'''
+
 
 # ingest first data
 # def people_1():
@@ -17,12 +45,15 @@ customers_2 = list(generator_2)
 
 
 
+
+
+
 pipeline = dlt.pipeline(pipeline_name="customer_data",
-						#destination='duckdb', 
+						destination='duckdb', 
 						dataset_name='customer')
 # run the pipeline with default settings, and capture the outcome
 info = pipeline.run(customers_2, 
                     table_name="shoppy_users", 
-                    write_disposition="merge",
-                    primary_key="ID")
+                    write_disposition="append")
+                    #primary_key="ID")
   
